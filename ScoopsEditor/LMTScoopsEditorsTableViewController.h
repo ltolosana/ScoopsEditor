@@ -12,6 +12,8 @@
 #define UNPUBLISHED_SECTION 0
 #define PUBLISHED_SECTION 1
 
+typedef void (^completeBlock)(NSArray* results);
+
 
 @interface LMTScoopsEditorsTableViewController : UITableViewController
 

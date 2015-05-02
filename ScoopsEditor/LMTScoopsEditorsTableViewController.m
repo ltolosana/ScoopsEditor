@@ -13,7 +13,11 @@
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "AzureKeys.h"
 
-@interface LMTScoopsEditorsTableViewController ()
+@interface LMTScoopsEditorsTableViewController (){
+    MSClient * client;
+    NSString *userFBId;
+    NSString *tokenFB;
+}
 
 @end
 
@@ -37,19 +41,22 @@
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
+    //Login
+    [self loginFB];
+
     
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+ 
     // Llamamos a los metodos de Azure para crear y configurar la conexion
     [self warmupMSClient];
     
     // Alta en notificaciones
     [self setupNotifications];
     
-    
-}
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -200,6 +207,7 @@
     
 }
 
+
 #pragma mark - Actions
 -(void) addNewScoop:(id) sender{
     
@@ -213,11 +221,96 @@
 #pragma mark - Azure connect, setup, login etc...
 
 -(void)warmupMSClient{
-    MSClient *client = [MSClient clientWithApplicationURL:[NSURL URLWithString:AZUREMOBILESERVICE_ENDPOINT]
+    client = [MSClient clientWithApplicationURL:[NSURL URLWithString:AZUREMOBILESERVICE_ENDPOINT]
                                            applicationKey:AZUREMOBILESERVICE_APPKEY];
     
     NSLog(@"%@", client.debugDescription);
 }
+
+#pragma mark - Login
+- (void)loginFB {
+    //login
+    
+    
+    [self loginAppInViewController:self withCompletion:^(NSArray *results) {
+        
+        NSLog(@"Resultados ---> %@", results);
+        
+    }];
+}
+
+
+- (void)loginAppInViewController:(UIViewController *)controller withCompletion:(completeBlock)bloque{
+    
+    [self loadUserAuthInfo];
+    
+    if (client.currentUser){
+        [client invokeAPI:@"getuserinfofromauthprovider" body:nil HTTPMethod:@"GET" parameters:nil headers:nil completion:^(id result, NSHTTPURLResponse *response, NSError *error) {
+            
+            //tenemos info extra del usuario
+            NSLog(@"%@", result);
+//            self.profilePicture = [NSURL URLWithString:result[@"picture"][@"data"][@"url"]];
+            self.title = [@"Editor de noticias: " stringByAppendingString:result[@"name"]];
+        }];
+        
+        return;
+    }
+    
+    [client loginWithProvider:@"facebook"
+                   controller:controller
+                     animated:YES
+                   completion:^(MSUser *user, NSError *error) {
+                       
+                       if (error) {
+                           NSLog(@"Error en el login : %@", error);
+                           bloque(nil);
+                       } else {
+                           NSLog(@"user -> %@", user);
+                           
+                           [self saveAuthInfo];
+                           [client invokeAPI:@"getuserinfofromauthprovider" body:nil HTTPMethod:@"GET" parameters:nil headers:nil completion:^(id result, NSHTTPURLResponse *response, NSError *error) {
+                               
+                               //tenemos info extra del usuario
+                               NSLog(@"%@", result);
+//                               self.profilePicture = [NSURL URLWithString:result[@"picture"][@"data"][@"url"]];
+                               self.title = [@"Editor de noticias: " stringByAppendingString:result[@"name"]];
+                               
+                           }];
+                           
+                           bloque(@[user]);
+                       }
+                   }];
+    
+}
+
+
+- (BOOL)loadUserAuthInfo{
+     
+    userFBId = [[NSUserDefaults standardUserDefaults]objectForKey:@"userID"];
+    tokenFB = [[NSUserDefaults standardUserDefaults]objectForKey:@"tokenFB"];
+    
+    if (userFBId) {
+        client.currentUser = [[MSUser alloc]initWithUserId:userFBId];
+        client.currentUser.mobileServiceAuthenticationToken = [[NSUserDefaults standardUserDefaults]objectForKey:@"tokenFB"];
+        
+        
+        
+        return TRUE;
+    }
+    
+    return FALSE;
+}
+
+
+- (void) saveAuthInfo{
+    [[NSUserDefaults standardUserDefaults]setObject:client.currentUser.userId forKey:@"userID"];
+    [[NSUserDefaults standardUserDefaults]setObject:client.currentUser.mobileServiceAuthenticationToken
+                                             forKey:@"tokenFB"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    
+}
+
 
 #pragma mark -  Notifications
 -(void) setupNotifications{
