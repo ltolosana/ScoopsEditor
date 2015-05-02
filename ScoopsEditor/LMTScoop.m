@@ -40,6 +40,11 @@
 }
 
 
++(NSArray *) observableKeys{
+    return @[@"title", @"body", @"author", @"photo", @"rating"];
+}
+
+
 //Designated Init
 
 -(id) initWithTitle: (NSString *) title
@@ -57,7 +62,6 @@
         _published = published;
         _rating = rating;
     }
-    
     return self;
 }
 
@@ -74,18 +78,45 @@
                         rating:NO_RATING];
 }
 
-#pragma mark - Notifications
--(void) notifyChanges{
-    
-    NSNotification *n = [NSNotification
-                         notificationWithName:SCOOP_DID_CHANGE_NOTIFICATION
-                         object:self
-                         userInfo:@{SCOOP_KEY : self}];
-    
-    [[NSNotificationCenter defaultCenter] postNotification:n];
-    
-    
-    
-}
+
+//#pragma mark - Notifications
+//-(void) notifyChanges{
+//    
+//    NSNotification *n = [NSNotification
+//                         notificationWithName:SCOOP_DID_CHANGE_NOTIFICATION
+//                         object:self
+//                         userInfo:@{SCOOP_KEY : self}];
+//    
+//    [[NSNotificationCenter defaultCenter] postNotification:n];
+//    
+//    
+//    
+//}
+
+//#pragma mark - KVO
+//-(void) setupKVO{
+//    
+//    // Observamos todas las propiedades EXCEPTO modificationDate
+//    for (NSString *key in [[self class] observableKeys]) {
+//        
+//        [self addObserver:self
+//               forKeyPath:key
+//                  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+//                  context:NULL];
+//    }
+//    
+//}
+//
+//-(void) tearDownKVO{
+//    
+//    // Me doy de baja de todas las notificaciones
+//    for (NSString *key in [[self class] observableKeys]) {
+//        
+//        [self removeObserver:self
+//                  forKeyPath:key];
+//    }
+//    
+//}
+
 
 @end

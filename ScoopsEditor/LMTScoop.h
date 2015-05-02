@@ -38,6 +38,8 @@
                         author: (NSString *) author
                          photo: (UIImage *) photo;
 
++(NSArray *) observableKeys;
+
 //Designated Init
 
 -(id) initWithTitle: (NSString *) title

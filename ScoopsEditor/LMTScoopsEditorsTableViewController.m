@@ -38,7 +38,7 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     //Para que al echar hacia atras desde el scoopEditorVC se actualice la tabla
-    NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
+//    NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
 
     [super viewWillAppear:animated];
     
@@ -47,11 +47,14 @@
     //Login
     [self loginFB];
 
+    [self setupKVO];
+
+    
 //    [self.tableView reloadData];
     //Para que al echar hacia atras desde el scoopEditorVC se actualice la tabla sin hacer un reloadData completo
-    if (selectedRowIndexPath) {
-        [self.tableView reloadRowsAtIndexPaths:@[selectedRowIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-    }
+//    if (selectedRowIndexPath) {
+//        [self.tableView reloadRowsAtIndexPaths:@[selectedRowIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+//    }
 }
 
 - (void)viewDidLoad {
@@ -79,6 +82,7 @@
 
 -(void) dealloc{
     [self tearDownNotifications];
+    [self tearDownKVO];
 }
 
 
@@ -136,10 +140,16 @@
     cell.textLabel.text = scoop.title;
     cell.detailTextLabel.text = scoop.author;
     
+//    [self setupKVO];
+    
     // La devolvemos
     return cell;
 }
 
+//-(void) tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    [self tearDownKVO];
+//}
 
 /*
 // Override to support conditional editing of the table view.
@@ -223,10 +233,10 @@
                                            author:@"Autor"
                                             photo:nil];
     
-//    LMTScoopEditorViewController *newScoopVC = [[LMTScoopEditorViewController alloc] initWithModel:newScoop];
-//    
-//    [self.navigationController pushViewController:newScoopVC
-//                                         animated:YES];
+    LMTScoopEditorViewController *newScoopVC = [[LMTScoopEditorViewController alloc] initWithModel:newScoop];
+    
+    [self.navigationController pushViewController:newScoopVC
+                                         animated:YES];
     
     [self.model insertUnpublishedScoop:newScoop];
 
@@ -350,5 +360,38 @@
     [self.tableView reloadData];
 
 }
+
+#pragma mark - KVO
+#pragma mark - KVO
+-(void) setupKVO{
+    
+    // Observamos todas las propiedades EXCEPTO modificationDate
+    for (NSString *key in [[LMTScoop class] observableKeys]) {
+        
+        [self addObserver:self
+               forKeyPath:key
+                  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+                  context:NULL];
+    }
+    
+}
+
+-(void) tearDownKVO{
+    
+    // Me doy de baja de todas las notificaciones
+    for (NSString *key in [[LMTScoop class] observableKeys]) {
+        
+        [self removeObserver:self
+                  forKeyPath:key];
+    }
+    
+}
+
+-(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
+    [self.tableView reloadData];
+    
+}
+
 
 @end
