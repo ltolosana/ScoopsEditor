@@ -9,9 +9,13 @@
 #import "LMTScoops.h"
 #import "LMTScoop.h"
 
+#import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
+#import "AzureKeys.h"
+
+
 @interface LMTScoops ()
 
-@property (strong, nonatomic) NSArray *scoops;
+@property (strong, nonatomic) NSMutableArray *scoops;
 
 @end
 
@@ -28,24 +32,47 @@
 -(id) init{
     if (self = [super init]) {
         
-        LMTScoop *noticia1 = [LMTScoop scoopWithTitle:@"Noticia 1"
-                                                 body:@"Esta es una noticia  1 importante"
-                                               author:@"Yo mismo"
-                                                photo:nil];
-
+//        LMTScoop *noticia1 = [LMTScoop scoopWithTitle:@"Noticia 1"
+//                                                 body:@"Esta es una noticia  1 importante"
+//                                               author:@"Yo mismo"
+//                                                photo:nil];
+//
+//        
+//        LMTScoop *noticia2 = [LMTScoop scoopWithTitle:@"Noticia 2"
+//                                                 body:@"Esta es una noticia 2 importante"
+//                                               author:@"Yo mismo"
+//                                                photo:nil];
+// 
+//        LMTScoop *noticia3 = [LMTScoop scoopWithTitle:@"Noticia"
+//                                                 body:@"Esta es una noticia 3 importante"
+//                                               author:@"Yo mismo"
+//                                                photo:nil];
+//
+//        
+//        self.scoops = @[noticia1, noticia2, noticia3];
         
-        LMTScoop *noticia2 = [LMTScoop scoopWithTitle:@"Noticia 2"
-                                                 body:@"Esta es una noticia 2 importante"
-                                               author:@"Yo mismo"
-                                                photo:nil];
  
-        LMTScoop *noticia3 = [LMTScoop scoopWithTitle:@"Noticia"
-                                                 body:@"Esta es una noticia 3 importante"
-                                               author:@"Yo mismo"
-                                                photo:nil];
+//            for (id item in items) {
+//                NSLog(@"item -> %@", item);
+//                Scoop *scoop = [[Scoop alloc]initWithTitle:item[@"titulo"] andPhoto:nil aText:item[@"noticia"] anAuthor:@"nil" aCoor:CLLocationCoordinate2DMake(0, 0)];
+//                [model addObject:scoop];
+//            }
+//            [self.collectionView reloadData];
 
         
-        self.scoops = @[noticia1, noticia2, noticia3];
+        _scoops = [@[] mutableCopy];
+        
+        MSClient *  client = [MSClient clientWithApplicationURL:[NSURL URLWithString:AZUREMOBILESERVICE_ENDPOINT]
+                                                 applicationKey:AZUREMOBILESERVICE_APPKEY];
+        
+        MSTable *table = [client tableWithName:@"news"];
+        
+        MSQuery *queryModel = [[MSQuery alloc]initWithTable:table];
+        [queryModel readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
+            
+            [self serializaModelFromItemsDict:items];
+            
+        }];
         
     }
     
@@ -53,9 +80,40 @@
     
 }
 
+
 -(LMTScoop *) scoopAtIndex: (int) index{
     
     return [self.scoops objectAtIndex:index];
 }
+
+
+#pragma mark - Utils
+-(void) serializaModelFromItemsDict: (NSArray *)items{
+    
+    for (id item in items) {
+        NSLog(@"item -> %@", item);
+        
+        LMTScoop *scoop = [LMTScoop scoopWithTitle:item[@"titulo"]
+                                              body:item[@"noticia"]
+                                            author:nil
+                                             photo:nil];
+        
+        [self.scoops addObject:scoop];
+        
+    }
+    [self notifyChanges];
+
+}
+
+#pragma mark - Notifications
+-(void) notifyChanges{
+        
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    
+    [nc postNotificationName:LMTSCOOPS_DID_CHANGE_NOTIFICATION
+                      object:self];
+}
+
+
 
 @end

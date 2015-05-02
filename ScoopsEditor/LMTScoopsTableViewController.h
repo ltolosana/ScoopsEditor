@@ -13,6 +13,7 @@
 @interface LMTScoopsTableViewController : UITableViewController
 
 @property (nonatomic, strong) LMTScoops *model;
+//@property (nonatomic, strong) NSMutableArray *model;
 
 -(id) initWithModel: (LMTScoops *) aModel style: (UITableViewStyle) aStyle;
 

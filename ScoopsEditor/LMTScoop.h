@@ -18,6 +18,8 @@
 @property (strong, nonatomic) NSString *author;
 @property (nonatomic) int rating; // 0 - 5
 @property (nonatomic, strong) UIImage *photo;
+@property (nonatomic) BOOL published;
+
 
 //Class Methods
 
@@ -25,6 +27,7 @@
                           body: (NSString *) body
                         author: (NSString *) author
                          photo: (UIImage *) photo
+                     published: (BOOL) published
                         rating: (int) rating;
 
 +(instancetype) scoopWithTitle: (NSString *) title
@@ -38,6 +41,7 @@
                body: (NSString *) body
              author: (NSString *) author
               photo: (UIImage *) photo
+          published: (BOOL) published
              rating: (int) rating;
 
 -(id) initWithTitle: (NSString *) title

@@ -16,12 +16,14 @@
                           body: (NSString *) body
                         author: (NSString *) author
                          photo: (UIImage *) photo
+                     published: (BOOL) published
                         rating: (int) rating{
     
     return [[self alloc] initWithTitle:title
                                   body:body
                                 author:author
-                                 photo: (UIImage *) photo
+                                 photo:photo
+                             published: published
                                 rating:rating];
     
 }
@@ -44,6 +46,7 @@
                body: (NSString *) body
              author: (NSString *) author
               photo: (UIImage *) photo
+          published: (BOOL) published
              rating: (int) rating{
     
     if (self = [super init]) {
@@ -51,6 +54,7 @@
         _body = body;
         _author = author;
         _photo = photo;
+        _published = published;
         _rating = rating;
     }
     
@@ -66,6 +70,7 @@
                           body:body
                         author:author
                          photo:photo
+                     published:NO
                         rating:NO_RATING];
 }
 

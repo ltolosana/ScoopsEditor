@@ -9,8 +9,13 @@
 #import "LMTScoopsTableViewController.h"
 #import "LMTScoops.h"
 #import "LMTScoopViewController.h"
+#import "LMTScoop.h"
+
+#import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
+#import "AzureKeys.h"
 
 @interface LMTScoopsTableViewController ()
+
 
 @end
 
@@ -28,6 +33,21 @@
     return self;
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    
+    
+    // Llamamos a los metodos de Azure para crear y configurar la conexion
+    [self warmupMSClient];
+
+    // Alta en notificaciones
+    [self setupNotifications];
+
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,6 +62,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) dealloc{
+    [self tearDownNotifications];
 }
 
 #pragma mark - Table view data source
@@ -126,6 +150,21 @@
     
 }
 
+
+#pragma mark - Azure connect, setup, login etc...
+
+-(void)warmupMSClient{
+    MSClient *client = [MSClient clientWithApplicationURL:[NSURL URLWithString:AZUREMOBILESERVICE_ENDPOINT]
+                                 applicationKey:AZUREMOBILESERVICE_APPKEY];
+    
+    NSLog(@"%@", client.debugDescription);
+}
+
+- (void)populateModelFromAzure{
+}
+    
+
+
 /*
 #pragma mark - Navigation
 
@@ -135,5 +174,30 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+#pragma mark -  Notifications
+-(void) setupNotifications{
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    
+    [nc addObserver:self
+           selector:@selector(notifyThatScoopsDidChange:)
+               name:LMTSCOOPS_DID_CHANGE_NOTIFICATION
+             object:nil];
+    
+}
+
+-(void) tearDownNotifications{
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self];
+}
+
+//LMTSCOOPS_DID_CHANGE_NOTIFICATION
+-(void)notifyThatScoopsDidChange:(NSNotification*) notification{
+    
+    [self.tableView reloadData];
+}
 
 @end

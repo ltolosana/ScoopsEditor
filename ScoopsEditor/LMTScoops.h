@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 Luis M Tolosana Simon. All rights reserved.
 //
 
+#define LMTSCOOPS_DID_CHANGE_NOTIFICATION @"LMTSCOOPS_DID_CHANGE_NOTIFICATION"
+#define SCOOPS_KEY @"SCOOPS"
+
 @import Foundation;
 #import "LMTScoop.h"
 

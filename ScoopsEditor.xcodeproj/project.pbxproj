@@ -62,6 +62,7 @@
 		607A9A981AF4E6D500478FC3 /* LMTScoopEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMTScoopEditorViewController.h; sourceTree = "<group>"; };
 		607A9A991AF4E6D500478FC3 /* LMTScoopEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTScoopEditorViewController.m; sourceTree = "<group>"; };
 		607A9A9A1AF4E6D500478FC3 /* LMTScoopEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMTScoopEditorViewController.xib; sourceTree = "<group>"; };
+		607A9A9E1AF4F54200478FC3 /* AzureKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AzureKeys.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +87,7 @@
 		60619E3F1AF4C11D00E60B40 = {
 			isa = PBXGroup;
 			children = (
+				607A9A9E1AF4F54200478FC3 /* AzureKeys.h */,
 				60619E4A1AF4C11D00E60B40 /* ScoopsEditor */,
 				60619E641AF4C11D00E60B40 /* ScoopsEditorTests */,
 				60619E491AF4C11D00E60B40 /* Products */,

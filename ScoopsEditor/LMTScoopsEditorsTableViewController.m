@@ -10,6 +10,8 @@
 #import "LMTScoopsEditor.h"
 #import "LMTScoopEditorViewController.h"
 
+#import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
+#import "AzureKeys.h"
 
 @interface LMTScoopsEditorsTableViewController ()
 
@@ -30,9 +32,24 @@
     return self;
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    
+    // Llamamos a los metodos de Azure para crear y configurar la conexion
+    [self warmupMSClient];
+    
+    // Alta en notificaciones
+    [self setupNotifications];
+    
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -45,6 +62,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void) dealloc{
+    [self tearDownNotifications];
+}
+
 
 #pragma mark - Table view data source
 
@@ -186,10 +208,40 @@
                                            author:@"Autor"
                                             photo:nil];
     
+}
+
+#pragma mark - Azure connect, setup, login etc...
+
+-(void)warmupMSClient{
+    MSClient *client = [MSClient clientWithApplicationURL:[NSURL URLWithString:AZUREMOBILESERVICE_ENDPOINT]
+                                           applicationKey:AZUREMOBILESERVICE_APPKEY];
     
+    NSLog(@"%@", client.debugDescription);
+}
+
+#pragma mark -  Notifications
+-(void) setupNotifications{
     
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    
+    [nc addObserver:self
+           selector:@selector(notifyThatScoopsEditorDidChange:)
+               name:LMTSCOOPSEDITOR_DID_CHANGE_NOTIFICATION
+             object:nil];
     
 }
 
+-(void) tearDownNotifications{
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self];
+}
+
+//LMTSCOOPSEDITOR_DID_CHANGE_NOTIFICATION
+-(void)notifyThatScoopsEditorDidChange:(NSNotification*) notification{
+    
+    [self.tableView reloadData];
+
+}
 
 @end
