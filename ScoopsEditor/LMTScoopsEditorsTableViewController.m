@@ -14,7 +14,7 @@
 #import "AzureKeys.h"
 
 @interface LMTScoopsEditorsTableViewController (){
-    MSClient * client;
+    MSClient *client;
     NSString *userFBId;
     NSString *tokenFB;
 }
@@ -195,7 +195,8 @@
         scoop = [self.model publishedScoopAtIndex:indexPath.row];
     }
 
-    LMTScoopEditorViewController *scoopVC = [[LMTScoopEditorViewController alloc] initWithModel:scoop];
+    LMTScoopEditorViewController *scoopVC = [[LMTScoopEditorViewController alloc] initWithModel:scoop
+                                                                                         client:client];
     
     [self.navigationController pushViewController:scoopVC
                                          animated:YES];
@@ -229,11 +230,13 @@
 -(void) addNewScoop:(id) sender{
     
     LMTScoop *newScoop = [LMTScoop scoopWithTitle:@"New scoop"
+                                       identifier:nil
                                              body:nil
                                            author:@"Autor"
                                             photo:nil];
     
-    LMTScoopEditorViewController *newScoopVC = [[LMTScoopEditorViewController alloc] initWithModel:newScoop];
+    LMTScoopEditorViewController *newScoopVC = [[LMTScoopEditorViewController alloc] initWithModel:newScoop
+                                                                                            client:client];
     
     [self.navigationController pushViewController:newScoopVC
                                          animated:YES];

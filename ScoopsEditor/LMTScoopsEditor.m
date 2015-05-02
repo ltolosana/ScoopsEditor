@@ -107,6 +107,7 @@
         NSLog(@"item -> %@", item);
         
         LMTScoop *scoop = [LMTScoop scoopWithTitle:item[@"titulo"]
+                                        identifier:item[@"id"]
                                               body:item[@"noticia"]
                                             author:nil
                                              photo:nil];

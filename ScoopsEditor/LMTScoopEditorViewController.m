@@ -9,6 +9,7 @@
 #import "LMTScoopEditorViewController.h"
 #import "LMTScoop.h"
 
+
 @interface LMTScoopEditorViewController ()
 
 @end
@@ -16,12 +17,13 @@
 @implementation LMTScoopEditorViewController
 
 #pragma mark - Init
--(id) initWithModel: (LMTScoop *) aModel{
+-(id) initWithModel: (LMTScoop *) aModel client:(MSClient *) aClient{
     
     if (self = [super initWithNibName:nil
                                bundle:nil]) {
         
         _model = aModel;
+        _client = aClient;
         
         self.title = aModel.title;
         
@@ -45,6 +47,10 @@
     [super viewWillDisappear:animated];
     
     [self syncModelWithView];
+    
+    [self uploadScoopToAzure];
+    
+    [self.tabBarController.tabBar setHidden:NO];
     
 }
 
@@ -131,6 +137,46 @@
     
 }
 
+#pragma mark - Azure
+
+- (void)uploadScoopToAzure{
+    MSTable *news = [self.client tableWithName:@"news"];
+    //    Scoop *scoop = [[Scoop alloc]initWithTitle:self.titleText.text
+    //                                      andPhoto:nil
+    //                                         aText:self.boxNews.text
+    //                                      anAuthor:@""
+    //                                         aCoor:CLLocationCoordinate2DMake(0, 0)];
+    
+    if (self.model.identifier) {
+        // Si la noticia ya existe, la actualizamos
+        NSDictionary *scoop = @{@"id" : self.model.identifier, @"titulo" : self.model.title, @"noticia" : self.model.body, @"published" : @NO};
+        [news update:scoop
+          completion:^(NSDictionary *item, NSError *error) {
+              
+              if (error) {
+                  NSLog(@"Error %@", error);
+              } else {
+                  NSLog(@"OK");
+              }
+              
+          }];
+    }else{
+        //y si no, metemos una nueva
+        NSDictionary *scoop = @{@"titulo" : self.model.title, @"noticia" : self.model.body, @"published" : @NO};
+        [news insert:scoop
+          completion:^(NSDictionary *item, NSError *error) {
+              
+              if (error) {
+                  NSLog(@"Error %@", error);
+              } else {
+                  self.model.identifier = item[@"id"];
+                  NSLog(@"OK");
+              }
+              
+          }];
+        
+    }
+}
 
 /*
 #pragma mark - Navigation

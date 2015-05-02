@@ -13,6 +13,7 @@
 //Class Methods
 
 +(instancetype) scoopWithTitle: (NSString *) title
+identifier: (NSString *) identifier
                           body: (NSString *) body
                         author: (NSString *) author
                          photo: (UIImage *) photo
@@ -20,6 +21,7 @@
                         rating: (int) rating{
     
     return [[self alloc] initWithTitle:title
+                            identifier: (NSString *) identifier
                                   body:body
                                 author:author
                                  photo:photo
@@ -29,11 +31,13 @@
 }
 
 +(instancetype) scoopWithTitle: (NSString *) title
+                    identifier: (NSString *) identifier
                           body: (NSString *) body
                         author: (NSString *) author
                          photo: (UIImage *) photo{
     
     return [[self alloc] initWithTitle:title
+                            identifier: (NSString *) identifier
                                   body:body
                                 author:author
                                  photo:photo];
@@ -48,6 +52,7 @@
 //Designated Init
 
 -(id) initWithTitle: (NSString *) title
+         identifier: (NSString *) identifier
                body: (NSString *) body
              author: (NSString *) author
               photo: (UIImage *) photo
@@ -56,6 +61,7 @@
     
     if (self = [super init]) {
         _title = title;
+        _identifier = identifier;
         _body = body;
         _author = author;
         _photo = photo;
@@ -66,11 +72,13 @@
 }
 
 -(id) initWithTitle: (NSString *) title
+         identifier: (NSString *) identifier
                body: (NSString *) body
              author: (NSString *) author
               photo: (UIImage *) photo{
     
     return [self initWithTitle:title
+                    identifier:identifier
                           body:body
                         author:author
                          photo:photo

@@ -16,6 +16,7 @@
 
 @interface LMTScoop : NSObject
 
+@property (strong, nonatomic) NSString *identifier;
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *body;
 @property (strong, nonatomic) NSString *author;
@@ -24,9 +25,11 @@
 @property (nonatomic) BOOL published;
 
 
+
 //Class Methods
 
 +(instancetype) scoopWithTitle: (NSString *) title
+                    identifier: (NSString *) identifier
                           body: (NSString *) body
                         author: (NSString *) author
                          photo: (UIImage *) photo
@@ -34,6 +37,7 @@
                         rating: (int) rating;
 
 +(instancetype) scoopWithTitle: (NSString *) title
+                    identifier: (NSString *) identifier
                           body: (NSString *) body
                         author: (NSString *) author
                          photo: (UIImage *) photo;
@@ -43,6 +47,7 @@
 //Designated Init
 
 -(id) initWithTitle: (NSString *) title
+         identifier: (NSString *) identifier
                body: (NSString *) body
              author: (NSString *) author
               photo: (UIImage *) photo
@@ -50,6 +55,7 @@
              rating: (int) rating;
 
 -(id) initWithTitle: (NSString *) title
+         identifier: (NSString *) identifier
                body: (NSString *) body
              author: (NSString *) author
               photo: (UIImage *) photo;
