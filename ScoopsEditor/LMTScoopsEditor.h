@@ -20,4 +20,6 @@
 -(LMTScoop *) unpublishedScoopAtIndex: (int) index;
 -(LMTScoop *) publishedScoopAtIndex: (int) index;
 
+-(void) insertUnpublishedScoop: (LMTScoop *) scoop;
+
 @end

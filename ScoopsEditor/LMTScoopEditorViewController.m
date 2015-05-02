@@ -34,10 +34,20 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self syncModelWithView];
+    [self syncViewWithModel];
+    
+    [self.tabBarController.tabBar setHidden:YES];
     
     self.titleTextField.delegate = self;
 }
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [self syncModelWithView];
+    
+}
+
 
 
 - (void)viewDidLoad {
@@ -52,7 +62,7 @@
 
 
 #pragma mark - Utils
--(void)syncModelWithView{
+-(void) syncViewWithModel{
     
     self.titleTextField.text = self.model.title;
     self.authorLabel.text = self.model.author;
@@ -61,9 +71,64 @@
     
 }
 
+-(void)syncModelWithView{
+    
+    // Sincronizo vistas --> modelo
+    self.model.title = self.titleTextField.text;
+    self.model.body = self.bodyTextView.text;
+    self.model.photo = self.photoView.image;
+    
+
+}
+
+#pragma mark - Actions
 -(IBAction)hideKeyboard:(id)sender{
     
     [self.view endEditing:YES];
+}
+
+- (IBAction)takePicture:(id)sender {
+    
+    // Creamos una UIImagePickerController
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    
+    // Lo configuro
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        // Uso la camara
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }else{
+        // Tiro del carrete
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    
+    picker.delegate = self;
+        
+    // Lo muestro de forma modal
+    [self presentViewController:picker
+                       animated:YES
+                     completion:^{
+                         // Esto se va a ejecutar cuando termine la animacion que muestra al picker.
+                     }];
+    
+    
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+-(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+        
+    // Sacamos la UIImage del diccionario
+    UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    // La muestro
+    self.model.photo = img;
+    
+    // Quito de encima el controlador que estamos presentando
+    [self dismissViewControllerAnimated:YES
+                             completion:^{
+                                 // Se ejecutara cuando se haya ocultado del todo
+                             }];
+    
 }
 
 

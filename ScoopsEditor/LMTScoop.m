@@ -74,5 +74,18 @@
                         rating:NO_RATING];
 }
 
+#pragma mark - Notifications
+-(void) notifyChanges{
+    
+    NSNotification *n = [NSNotification
+                         notificationWithName:SCOOP_DID_CHANGE_NOTIFICATION
+                         object:self
+                         userInfo:@{SCOOP_KEY : self}];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:n];
+    
+    
+    
+}
 
 @end

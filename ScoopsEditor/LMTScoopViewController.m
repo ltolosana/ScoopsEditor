@@ -34,7 +34,7 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self syncModelWithView];
+    [self syncViewWithModel];
 }
 
 
@@ -50,14 +50,16 @@
 
 
 #pragma mark - Utils
--(void)syncModelWithView{
+-(void) syncViewWithModel{
     
+    //sincronizo modelo --> vistas
     self.titleLabel.text = self.model.title;
     self.authorLabel.text = self.model.author;
     self.bodyLabel.text = self.model.body;
     self.photoView.image = self.model.photo;
     
 }
+
 /*
 #pragma mark - Navigation
 

@@ -37,6 +37,9 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated{
+    //Para que al echar hacia atras desde el scoopEditorVC se actualice la tabla
+    NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
+
     [super viewWillAppear:animated];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -44,7 +47,11 @@
     //Login
     [self loginFB];
 
-    
+//    [self.tableView reloadData];
+    //Para que al echar hacia atras desde el scoopEditorVC se actualice la tabla sin hacer un reloadData completo
+    if (selectedRowIndexPath) {
+        [self.tableView reloadRowsAtIndexPaths:@[selectedRowIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
 }
 
 - (void)viewDidLoad {
@@ -216,6 +223,13 @@
                                            author:@"Autor"
                                             photo:nil];
     
+//    LMTScoopEditorViewController *newScoopVC = [[LMTScoopEditorViewController alloc] initWithModel:newScoop];
+//    
+//    [self.navigationController pushViewController:newScoopVC
+//                                         animated:YES];
+    
+    [self.model insertUnpublishedScoop:newScoop];
+
 }
 
 #pragma mark - Azure connect, setup, login etc...

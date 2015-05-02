@@ -9,7 +9,7 @@
 @import UIKit;
 #import "LMTScoop.h"
 
-@interface LMTScoopEditorViewController : UIViewController<UITextFieldDelegate>
+@interface LMTScoopEditorViewController : UIViewController<UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -20,5 +20,6 @@
 -(id) initWithModel: (LMTScoop *) aModel;
 
 -(IBAction)hideKeyboard:(id)sender;
+- (IBAction)takePicture:(id)sender;
 
 @end

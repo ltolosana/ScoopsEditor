@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 Luis M Tolosana Simon. All rights reserved.
 //
 
+#define SCOOP_DID_CHANGE_NOTIFICATION @"LMTSCOOP_DID_CHANGE_NOTIFICATION"
+#define SCOOP_KEY @"SCOOP"
+
 @import Foundation;
 @import UIKit;
 

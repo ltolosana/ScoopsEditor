@@ -93,6 +93,13 @@
     return [self.publishedScoops objectAtIndex:index];
 }
 
+-(void) insertUnpublishedScoop: (LMTScoop *) scoop{
+    
+    [self.unpublishedScoops addObject:scoop];
+    
+    [self notifyChanges];
+}
+
 #pragma mark - Utils
 -(void) serializaModelFromItemsDict: (NSArray *)items{
     
