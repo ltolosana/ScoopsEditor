@@ -9,11 +9,19 @@
 /* Begin PBXBuildFile section */
 		60619E4E1AF4C11D00E60B40 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 60619E4D1AF4C11D00E60B40 /* main.m */; };
 		60619E511AF4C11D00E60B40 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60619E501AF4C11D00E60B40 /* AppDelegate.m */; };
-		60619E541AF4C11D00E60B40 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60619E531AF4C11D00E60B40 /* ViewController.m */; };
-		60619E571AF4C11D00E60B40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60619E551AF4C11D00E60B40 /* Main.storyboard */; };
 		60619E591AF4C11D00E60B40 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60619E581AF4C11D00E60B40 /* Images.xcassets */; };
 		60619E5C1AF4C11D00E60B40 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60619E5A1AF4C11D00E60B40 /* LaunchScreen.xib */; };
 		60619E681AF4C11D00E60B40 /* ScoopsEditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60619E671AF4C11D00E60B40 /* ScoopsEditorTests.m */; };
+		60619E721AF4C12B00E60B40 /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60619E711AF4C12B00E60B40 /* WindowsAzureMobileServices.framework */; };
+		60619E751AF4C1AB00E60B40 /* LMTScoop.m in Sources */ = {isa = PBXBuildFile; fileRef = 60619E741AF4C1AB00E60B40 /* LMTScoop.m */; };
+		60619E7A1AF4C5A600E60B40 /* LMTScoopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60619E781AF4C5A600E60B40 /* LMTScoopViewController.m */; };
+		60619E7B1AF4C5A600E60B40 /* LMTScoopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60619E791AF4C5A600E60B40 /* LMTScoopViewController.xib */; };
+		60619E7F1AF4D33D00E60B40 /* LMTScoops.m in Sources */ = {isa = PBXBuildFile; fileRef = 60619E7E1AF4D33D00E60B40 /* LMTScoops.m */; };
+		60619E821AF4D5DB00E60B40 /* LMTScoopsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60619E811AF4D5DB00E60B40 /* LMTScoopsTableViewController.m */; };
+		60619E851AF4DBB200E60B40 /* LMTScoopsEditorsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60619E841AF4DBB200E60B40 /* LMTScoopsEditorsTableViewController.m */; };
+		60619E881AF4DC8C00E60B40 /* LMTScoopsEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 60619E871AF4DC8C00E60B40 /* LMTScoopsEditor.m */; };
+		607A9A9B1AF4E6D500478FC3 /* LMTScoopEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 607A9A991AF4E6D500478FC3 /* LMTScoopEditorViewController.m */; };
+		607A9A9C1AF4E6D500478FC3 /* LMTScoopEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607A9A9A1AF4E6D500478FC3 /* LMTScoopEditorViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +40,28 @@
 		60619E4D1AF4C11D00E60B40 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		60619E4F1AF4C11D00E60B40 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		60619E501AF4C11D00E60B40 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		60619E521AF4C11D00E60B40 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		60619E531AF4C11D00E60B40 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		60619E561AF4C11D00E60B40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		60619E581AF4C11D00E60B40 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		60619E5B1AF4C11D00E60B40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		60619E611AF4C11D00E60B40 /* ScoopsEditorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScoopsEditorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60619E661AF4C11D00E60B40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60619E671AF4C11D00E60B40 /* ScoopsEditorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoopsEditorTests.m; sourceTree = "<group>"; };
+		60619E711AF4C12B00E60B40 /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
+		60619E731AF4C1AB00E60B40 /* LMTScoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMTScoop.h; sourceTree = "<group>"; };
+		60619E741AF4C1AB00E60B40 /* LMTScoop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTScoop.m; sourceTree = "<group>"; };
+		60619E771AF4C5A600E60B40 /* LMTScoopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMTScoopViewController.h; sourceTree = "<group>"; };
+		60619E781AF4C5A600E60B40 /* LMTScoopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTScoopViewController.m; sourceTree = "<group>"; };
+		60619E791AF4C5A600E60B40 /* LMTScoopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMTScoopViewController.xib; sourceTree = "<group>"; };
+		60619E7D1AF4D33D00E60B40 /* LMTScoops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMTScoops.h; sourceTree = "<group>"; };
+		60619E7E1AF4D33D00E60B40 /* LMTScoops.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTScoops.m; sourceTree = "<group>"; };
+		60619E801AF4D5DB00E60B40 /* LMTScoopsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMTScoopsTableViewController.h; sourceTree = "<group>"; };
+		60619E811AF4D5DB00E60B40 /* LMTScoopsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTScoopsTableViewController.m; sourceTree = "<group>"; };
+		60619E831AF4DBB200E60B40 /* LMTScoopsEditorsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMTScoopsEditorsTableViewController.h; sourceTree = "<group>"; };
+		60619E841AF4DBB200E60B40 /* LMTScoopsEditorsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTScoopsEditorsTableViewController.m; sourceTree = "<group>"; };
+		60619E861AF4DC8C00E60B40 /* LMTScoopsEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMTScoopsEditor.h; sourceTree = "<group>"; };
+		60619E871AF4DC8C00E60B40 /* LMTScoopsEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTScoopsEditor.m; sourceTree = "<group>"; };
+		607A9A981AF4E6D500478FC3 /* LMTScoopEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMTScoopEditorViewController.h; sourceTree = "<group>"; };
+		607A9A991AF4E6D500478FC3 /* LMTScoopEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTScoopEditorViewController.m; sourceTree = "<group>"; };
+		607A9A9A1AF4E6D500478FC3 /* LMTScoopEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMTScoopEditorViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60619E721AF4C12B00E60B40 /* WindowsAzureMobileServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +89,7 @@
 				60619E4A1AF4C11D00E60B40 /* ScoopsEditor */,
 				60619E641AF4C11D00E60B40 /* ScoopsEditorTests */,
 				60619E491AF4C11D00E60B40 /* Products */,
+				60619E711AF4C12B00E60B40 /* WindowsAzureMobileServices.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,11 +105,10 @@
 		60619E4A1AF4C11D00E60B40 /* ScoopsEditor */ = {
 			isa = PBXGroup;
 			children = (
+				60619E7C1AF4C5AB00E60B40 /* Controllers */,
+				60619E761AF4C1B000E60B40 /* Models */,
 				60619E4F1AF4C11D00E60B40 /* AppDelegate.h */,
 				60619E501AF4C11D00E60B40 /* AppDelegate.m */,
-				60619E521AF4C11D00E60B40 /* ViewController.h */,
-				60619E531AF4C11D00E60B40 /* ViewController.m */,
-				60619E551AF4C11D00E60B40 /* Main.storyboard */,
 				60619E581AF4C11D00E60B40 /* Images.xcassets */,
 				60619E5A1AF4C11D00E60B40 /* LaunchScreen.xib */,
 				60619E4B1AF4C11D00E60B40 /* Supporting Files */,
@@ -117,6 +140,36 @@
 				60619E661AF4C11D00E60B40 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		60619E761AF4C1B000E60B40 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				60619E731AF4C1AB00E60B40 /* LMTScoop.h */,
+				60619E741AF4C1AB00E60B40 /* LMTScoop.m */,
+				60619E7D1AF4D33D00E60B40 /* LMTScoops.h */,
+				60619E7E1AF4D33D00E60B40 /* LMTScoops.m */,
+				60619E861AF4DC8C00E60B40 /* LMTScoopsEditor.h */,
+				60619E871AF4DC8C00E60B40 /* LMTScoopsEditor.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		60619E7C1AF4C5AB00E60B40 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				60619E771AF4C5A600E60B40 /* LMTScoopViewController.h */,
+				60619E781AF4C5A600E60B40 /* LMTScoopViewController.m */,
+				60619E791AF4C5A600E60B40 /* LMTScoopViewController.xib */,
+				60619E801AF4D5DB00E60B40 /* LMTScoopsTableViewController.h */,
+				60619E811AF4D5DB00E60B40 /* LMTScoopsTableViewController.m */,
+				60619E831AF4DBB200E60B40 /* LMTScoopsEditorsTableViewController.h */,
+				60619E841AF4DBB200E60B40 /* LMTScoopsEditorsTableViewController.m */,
+				607A9A981AF4E6D500478FC3 /* LMTScoopEditorViewController.h */,
+				607A9A991AF4E6D500478FC3 /* LMTScoopEditorViewController.m */,
+				607A9A9A1AF4E6D500478FC3 /* LMTScoopEditorViewController.xib */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,8 +252,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60619E571AF4C11D00E60B40 /* Main.storyboard in Resources */,
+				607A9A9C1AF4E6D500478FC3 /* LMTScoopEditorViewController.xib in Resources */,
 				60619E5C1AF4C11D00E60B40 /* LaunchScreen.xib in Resources */,
+				60619E7B1AF4C5A600E60B40 /* LMTScoopViewController.xib in Resources */,
 				60619E591AF4C11D00E60B40 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,9 +273,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60619E541AF4C11D00E60B40 /* ViewController.m in Sources */,
+				60619E751AF4C1AB00E60B40 /* LMTScoop.m in Sources */,
 				60619E511AF4C11D00E60B40 /* AppDelegate.m in Sources */,
+				607A9A9B1AF4E6D500478FC3 /* LMTScoopEditorViewController.m in Sources */,
+				60619E7F1AF4D33D00E60B40 /* LMTScoops.m in Sources */,
 				60619E4E1AF4C11D00E60B40 /* main.m in Sources */,
+				60619E851AF4DBB200E60B40 /* LMTScoopsEditorsTableViewController.m in Sources */,
+				60619E821AF4D5DB00E60B40 /* LMTScoopsTableViewController.m in Sources */,
+				60619E7A1AF4C5A600E60B40 /* LMTScoopViewController.m in Sources */,
+				60619E881AF4DC8C00E60B40 /* LMTScoopsEditor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,14 +304,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		60619E551AF4C11D00E60B40 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				60619E561AF4C11D00E60B40 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		60619E5A1AF4C11D00E60B40 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -347,7 +399,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ScoopsEditor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -357,7 +414,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ScoopsEditor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -416,6 +478,7 @@
 				60619E6D1AF4C11D00E60B40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		60619E6E1AF4C11D00E60B40 /* Build configuration list for PBXNativeTarget "ScoopsEditorTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +487,7 @@
 				60619E701AF4C11D00E60B40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

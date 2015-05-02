@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "LMTScoops.h"
+#import "LMTScoopsEditor.h"
+#import "LMTScoopsTableViewController.h"
+#import "LMTScoopsEditorsTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +20,33 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    //Models
+    LMTScoops *noticias = [[LMTScoops alloc] init];
+    LMTScoopsEditor *noticiasEditor = [[LMTScoopsEditor alloc] init];
+
+    
+    //Controllers
+    LMTScoopsTableViewController *scoopsTVC = [[LMTScoopsTableViewController alloc] initWithModel:noticias
+                                                                                            style:UITableViewStylePlain];
+    LMTScoopsEditorsTableViewController *scoopsEditorTVC = [[LMTScoopsEditorsTableViewController alloc] initWithModel:noticiasEditor
+                                                                                                                style:UITableViewStylePlain];
+    
+    //Navigations
+    UINavigationController *scoopNav = [[UINavigationController alloc] initWithRootViewController:scoopsTVC];
+    UINavigationController *scoopEdNav = [[UINavigationController alloc] initWithRootViewController:scoopsEditorTVC];
+    
+    //Combiner
+    UITabBarController *tabbarVC = [[UITabBarController alloc] init];
+    [tabbarVC setViewControllers:@[scoopNav,scoopEdNav]];
+    
+    self.window.rootViewController = tabbarVC;
+    
+    self.window.backgroundColor = [UIColor orangeColor];
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
