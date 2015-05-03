@@ -23,6 +23,7 @@
 @property (nonatomic) int rating; // 0 - 5
 @property (nonatomic, strong) UIImage *photo;
 @property (nonatomic) BOOL published;
+@property (nonatomic) BOOL preparedToPublish;
 
 
 
@@ -34,13 +35,15 @@
                         author: (NSString *) author
                          photo: (UIImage *) photo
                      published: (BOOL) published
+             preparedToPublish: (BOOL) preparedToPublish
                         rating: (int) rating;
 
 +(instancetype) scoopWithTitle: (NSString *) title
                     identifier: (NSString *) identifier
                           body: (NSString *) body
                         author: (NSString *) author
-                         photo: (UIImage *) photo;
+                         photo: (UIImage *) photo
+                     published: (BOOL) published;
 
 +(NSArray *) observableKeys;
 
@@ -52,13 +55,16 @@
              author: (NSString *) author
               photo: (UIImage *) photo
           published: (BOOL) published
+  preparedToPublish: (BOOL) preparedToPublish
              rating: (int) rating;
 
 -(id) initWithTitle: (NSString *) title
          identifier: (NSString *) identifier
                body: (NSString *) body
              author: (NSString *) author
-              photo: (UIImage *) photo;
+              photo: (UIImage *) photo
+          published: (BOOL) published;
+
 
 
 @end

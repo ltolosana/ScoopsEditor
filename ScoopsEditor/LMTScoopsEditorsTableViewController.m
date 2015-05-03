@@ -233,7 +233,8 @@
                                        identifier:nil
                                              body:nil
                                            author:@"Autor"
-                                            photo:nil];
+                                            photo:nil
+                                        published:NO];
     
     LMTScoopEditorViewController *newScoopVC = [[LMTScoopEditorViewController alloc] initWithModel:newScoop
                                                                                             client:client];

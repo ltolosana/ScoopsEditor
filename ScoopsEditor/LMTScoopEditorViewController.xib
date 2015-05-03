@@ -52,6 +52,12 @@
                                 <action selector="takePicture:" destination="-1" id="UPf-90-xPR"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="oUx-X8-lbd"/>
+                        <barButtonItem title="Publish" id="yf1-B9-X0Q">
+                            <connections>
+                                <action selector="publishScoop:" destination="-1" id="CDN-q8-0CO"/>
+                            </connections>
+                        </barButtonItem>
                     </items>
                 </toolbar>
             </subviews>

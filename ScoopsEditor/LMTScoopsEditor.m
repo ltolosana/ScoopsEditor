@@ -106,11 +106,15 @@
     for (id item in items) {
         NSLog(@"item -> %@", item);
         
+        
+        NSNumber *p = item[@"published"];
+        
         LMTScoop *scoop = [LMTScoop scoopWithTitle:item[@"titulo"]
                                         identifier:item[@"id"]
                                               body:item[@"noticia"]
                                             author:nil
-                                             photo:nil];
+                                             photo:nil
+                                         published:p.boolValue];
         
         //Comprobamos si esta publicada o no y la metemos en  el array correspondiente
         if (scoop.published == YES) {

@@ -18,6 +18,7 @@ identifier: (NSString *) identifier
                         author: (NSString *) author
                          photo: (UIImage *) photo
                      published: (BOOL) published
+             preparedToPublish: (BOOL) preparedToPublish
                         rating: (int) rating{
     
     return [[self alloc] initWithTitle:title
@@ -25,7 +26,8 @@ identifier: (NSString *) identifier
                                   body:body
                                 author:author
                                  photo:photo
-                             published: published
+                             published:published
+                     preparedToPublish:preparedToPublish
                                 rating:rating];
     
 }
@@ -34,13 +36,15 @@ identifier: (NSString *) identifier
                     identifier: (NSString *) identifier
                           body: (NSString *) body
                         author: (NSString *) author
-                         photo: (UIImage *) photo{
+                         photo: (UIImage *) photo
+                     published: (BOOL) published{
     
     return [[self alloc] initWithTitle:title
                             identifier: (NSString *) identifier
                                   body:body
                                 author:author
-                                 photo:photo];
+                                 photo:photo
+                             published:published];
 }
 
 
@@ -57,6 +61,7 @@ identifier: (NSString *) identifier
              author: (NSString *) author
               photo: (UIImage *) photo
           published: (BOOL) published
+  preparedToPublish: (BOOL) preparedToPublish
              rating: (int) rating{
     
     if (self = [super init]) {
@@ -66,6 +71,7 @@ identifier: (NSString *) identifier
         _author = author;
         _photo = photo;
         _published = published;
+        _preparedToPublish = preparedToPublish;
         _rating = rating;
     }
     return self;
@@ -75,14 +81,16 @@ identifier: (NSString *) identifier
          identifier: (NSString *) identifier
                body: (NSString *) body
              author: (NSString *) author
-              photo: (UIImage *) photo{
+              photo: (UIImage *) photo
+          published: (BOOL) published{
     
     return [self initWithTitle:title
                     identifier:identifier
                           body:body
                         author:author
                          photo:photo
-                     published:NO
+                     published:published
+             preparedToPublish:NO
                         rating:NO_RATING];
 }
 

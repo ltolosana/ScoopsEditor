@@ -97,7 +97,8 @@
                                         identifier:item[@"id"]
                                               body:item[@"noticia"]
                                             author:nil
-                                             photo:nil];
+                                             photo:nil
+                                         published:item[@"published"]];
         
         [self.scoops addObject:scoop];
         

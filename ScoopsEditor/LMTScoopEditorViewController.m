@@ -123,6 +123,13 @@
     
 }
 
+- (IBAction)publishScoop:(id)sender {
+    
+    self.model.preparedToPublish = YES;
+    [self uploadScoopToAzure];
+    
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 -(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
         
@@ -158,7 +165,7 @@
     
     if (self.model.identifier) {
         // Si la noticia ya existe, la actualizamos
-        NSDictionary *scoop = @{@"id" : self.model.identifier, @"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.photoName, @"published" : @NO};
+        NSDictionary *scoop = @{@"id" : self.model.identifier, @"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.photoName, @"published" : @(self.model.published), @"preparedToPublish" : @(self.model.preparedToPublish)};
         [news update:scoop
           completion:^(NSDictionary *item, NSError *error) {
               
@@ -171,7 +178,7 @@
           }];
     }else{
         //y si no, metemos una nueva
-        NSDictionary *scoop = @{@"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.photoName, @"published" : @NO};
+        NSDictionary *scoop = @{@"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.photoName, @"published" : @(self.model.published), @"preparedToPublish" : @(self.model.preparedToPublish)};
         [news insert:scoop
           completion:^(NSDictionary *item, NSError *error) {
               
