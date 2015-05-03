@@ -28,6 +28,8 @@
         _client = aClient;
         
         self.title = aModel.title;
+        //self.photoName = @"image01";
+
         
     }
     return self;
@@ -74,7 +76,8 @@
     self.bodyTextView.text = self.model.body;
     self.photoView.image = self.model.photo;
     
-    self.photoName = @"image01";
+//    self.photoName = self.model.photoString;
+    
 }
 
 -(void)syncModelWithView{
@@ -121,13 +124,14 @@
 }
 
 - (IBAction)saveScoop:(id)sender {
+    [self syncModelWithView];
     [self uploadScoopToAzure];
 }
 
 - (IBAction)publishScoop:(id)sender {
     
     self.model.preparedToPublish = YES;
-    [self uploadScoopToAzure];
+    [self publishScoopToAzure];
     
 }
 
@@ -166,7 +170,7 @@
     
     if (self.model.identifier) {
         // Si la noticia ya existe, la actualizamos
-        NSDictionary *scoop = @{@"id" : self.model.identifier, @"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.photoName, @"author" : self.model.author, @"authorname" : self.model.authorName, @"published" : @(self.model.published), @"preparedToPublish" : @(self.model.preparedToPublish)};
+        NSDictionary *scoop = @{@"id" : self.model.identifier, @"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.model.photoString, @"author" : self.model.author, @"authorname" : self.model.authorName, @"published" : @(self.model.published), @"preparedToPublish" : @(self.model.preparedToPublish)};
         [news update:scoop
           completion:^(NSDictionary *item, NSError *error) {
               
@@ -179,7 +183,7 @@
           }];
     }else{
         //y si no, metemos una nueva
-        NSDictionary *scoop = @{@"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.photoName, @"author" : self.model.author, @"authorname" : self.model.authorName, @"published" : @(self.model.published), @"preparedToPublish" : @(self.model.preparedToPublish)};
+        NSDictionary *scoop = @{@"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.model.photoString, @"author" : self.model.author, @"authorname" : self.model.authorName, @"published" : @(self.model.published), @"preparedtopublish" : @(self.model.preparedToPublish)};
         [news insert:scoop
           completion:^(NSDictionary *item, NSError *error) {
               
@@ -188,11 +192,11 @@
               } else {
                   //Actualizamos con el photoName
                   self.model.identifier = item[@"id"];
-                  self.photoName = self.model.identifier;
+                  self.model.photoString = self.model.identifier;
                   NSLog(@"OK");
                   
                   // Y actualizamos el remoto
-                  NSDictionary *scoop = @{@"id" : self.model.identifier, @"photostring" : self.photoName};
+                  NSDictionary *scoop = @{@"id" : self.model.identifier, @"photostring" : self.model.photoString};
                   [news update:scoop
                     completion:^(NSDictionary *item, NSError *error) {
                         if (error) {
@@ -220,7 +224,7 @@
     [self.client invokeAPI:@"getsasurl"
                       body:nil
                 HTTPMethod:@"PUT"
-                parameters:@{@"blobName":self.photoName}
+                parameters:@{@"blobName":self.model.photoString}
                    headers:nil
                 completion:^(id result, NSHTTPURLResponse *response, NSError *error) {
         
@@ -268,6 +272,24 @@
     }];
     [uploadTask resume];
 }
+
+- (void)publishScoopToAzure{
+    
+    MSTable *news = [self.client tableWithName:@"news"];
+    
+    NSDictionary *scoop = @{@"id" : self.model.identifier, @"preparedtopublish" : @(self.model.preparedToPublish)};
+    [news update:scoop
+      completion:^(NSDictionary *item, NSError *error) {
+          
+          if (error) {
+              NSLog(@"Error %@", error);
+          } else {
+              NSLog(@"OK");
+          }
+          
+      }];
+}
+
 
 //-(void) uploadScoopToAzureUsingPhotoString{
 //    

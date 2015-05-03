@@ -12,6 +12,8 @@
 @import Foundation;
 @import UIKit;
 
+@class LMTImage;
+
 #define NO_RATING -1
 
 @interface LMTScoop : NSObject
@@ -23,6 +25,7 @@
 @property (strong, nonatomic) NSString *authorName;
 @property (nonatomic) int rating; // 0 - 5
 @property (nonatomic, strong) UIImage *photo;
+@property (nonatomic, copy) NSString *photoString;
 @property (nonatomic) BOOL published;
 @property (nonatomic) BOOL preparedToPublish;
 
@@ -35,7 +38,7 @@
                           body: (NSString *) body
                         author: (NSString *) author
                     authorName: (NSString *) authorName
-                         photo: (UIImage *) photo
+                   photoString: (NSString *) photoString
                      published: (BOOL) published
              preparedToPublish: (BOOL) preparedToPublish
                         rating: (int) rating;
@@ -45,7 +48,14 @@
                           body: (NSString *) body
                         author: (NSString *) author
                     authorName: (NSString *) authorName
-                         photo: (UIImage *) photo
+                   photoString: (NSString *) photoString
+                     published: (BOOL) published;
+
++(instancetype) scoopWithTitle: (NSString *) title
+                    identifier: (NSString *) identifier
+                          body: (NSString *) body
+                        author: (NSString *) author
+                    authorName: (NSString *) authorName
                      published: (BOOL) published;
 
 +(NSArray *) observableKeys;
@@ -57,7 +67,7 @@
                body: (NSString *) body
              author: (NSString *) author
          authorName: (NSString *) authorName
-              photo: (UIImage *) photo
+        photoString: (NSString *) photoString
           published: (BOOL) published
   preparedToPublish: (BOOL) preparedToPublish
              rating: (int) rating;
@@ -67,9 +77,15 @@
                body: (NSString *) body
              author: (NSString *) author
          authorName: (NSString *) authorName
-              photo: (UIImage *) photo
+        photoString: (NSString *) photoString
           published: (BOOL) published;
 
+-(id) initWithTitle: (NSString *) title
+         identifier: (NSString *) identifier
+               body: (NSString *) body
+             author: (NSString *) author
+         authorName: (NSString *) authorName
+          published: (BOOL) published;
 
 
 @end

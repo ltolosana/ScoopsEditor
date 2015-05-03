@@ -66,6 +66,7 @@
                                                  applicationKey:AZUREMOBILESERVICE_APPKEY];
         
         MSTable *table = [client tableWithName:@"news"];
+//        MSQuery *queryModel = [table queryWithPredicate:[NSPredicate predicateWithFormat:@"published == YES"]];
         
         MSQuery *queryModel = [[MSQuery alloc]initWithTable:table];
         [queryModel orderByDescending:@"__updatedAt"];
@@ -110,14 +111,17 @@
         
         
         NSNumber *p = item[@"published"];
+        NSNumber *pp = item[@"preparedtopublish"];
         
         LMTScoop *scoop = [LMTScoop scoopWithTitle:item[@"titulo"]
                                         identifier:item[@"id"]
                                               body:item[@"noticia"]
                                             author:item[@"author"]
                                         authorName:item[@"authorname"]
-                                             photo:nil
-                                         published:p.boolValue];
+                                       photoString:item[@"photostring"]
+                                         published:p.boolValue
+                                 preparedToPublish:pp.boolValue
+                                            rating:0];
         
         //Comprobamos si esta publicada o no y la metemos en  el array correspondiente
         if (scoop.published == YES) {

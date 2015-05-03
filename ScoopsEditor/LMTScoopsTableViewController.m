@@ -9,7 +9,7 @@
 #import "LMTScoopsTableViewController.h"
 #import "LMTScoops.h"
 #import "LMTScoopViewController.h"
-#import "LMTScoop.h"
+//#import "LMTScoop.h"
 
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "AzureKeys.h"
@@ -38,19 +38,19 @@
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    
-    
-    // Llamamos a los metodos de Azure para crear y configurar la conexion
-    [self warmupMSClient];
+    [self setupKVO];
 
-    // Alta en notificaciones
-    [self setupNotifications];
-
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Llamamos a los metodos de Azure para crear y configurar la conexion
+    [self warmupMSClient];
+    
+    // Alta en notificaciones
+    [self setupNotifications];
+
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -66,6 +66,8 @@
 
 -(void) dealloc{
     [self tearDownNotifications];
+    [self tearDownKVO];
+
 }
 
 #pragma mark - Table view data source
@@ -96,7 +98,7 @@
     LMTScoop *scoop = [self.model scoopAtIndex:indexPath.row];
     
 
-    // Sincronizar celda (vista) y modelo (vino)
+    // Sincronizar celda (vista) y modelo
     cell.imageView.image = scoop.photo;
     cell.textLabel.text = scoop.title;
     cell.detailTextLabel.text = scoop.authorName;
@@ -198,6 +200,37 @@
 -(void)notifyThatScoopsDidChange:(NSNotification*) notification{
     
     [self.tableView reloadData];
+}
+
+#pragma mark - KVO
+-(void) setupKVO{
+    
+    // Observamos todas las propiedades EXCEPTO modificationDate
+    for (NSString *key in [[LMTScoop class] observableKeys]) {
+        
+        [self addObserver:self
+               forKeyPath:key
+                  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+                  context:NULL];
+    }
+    
+}
+
+-(void) tearDownKVO{
+    
+    // Me doy de baja de todas las notificaciones
+    for (NSString *key in [[LMTScoop class] observableKeys]) {
+        
+        [self removeObserver:self
+                  forKeyPath:key];
+    }
+    
+}
+
+-(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
+    [self.tableView reloadData];
+    
 }
 
 @end

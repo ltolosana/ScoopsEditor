@@ -95,22 +95,26 @@
     for (id item in items) {
         
         NSNumber *p = item[@"published"];
+        NSNumber *pp = item[@"preparedtopublish"];
+        
         
 //        if (p.boolValue == YES) {
             
             
             NSLog(@"item -> %@", item);
-            
-            LMTScoop *scoop = [LMTScoop scoopWithTitle:item[@"titulo"]
-                                            identifier:item[@"id"]
-                                                  body:item[@"noticia"]
-                                                author:item[@"author"]
-                                            authorName:item[@"authorname"]
-                                                 photo:nil
-                                             published:p.boolValue];
-            
-            [self.scoops addObject:scoop];
-//        }
+        
+        LMTScoop *scoop = [LMTScoop scoopWithTitle:item[@"titulo"]
+                                        identifier:item[@"id"]
+                                              body:item[@"noticia"]
+                                            author:item[@"author"]
+                                        authorName:item[@"authorname"]
+                                       photoString:item[@"photostring"]
+                                         published:p.boolValue
+                                 preparedToPublish:pp.boolValue
+                                            rating:0];
+        
+        [self.scoops addObject:scoop];
+        //        }
     }
     [self notifyChanges];
 

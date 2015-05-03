@@ -7,8 +7,25 @@
 //
 
 #import "LMTScoop.h"
+#import "LMTImage.h"
+
+@interface LMTScoop ()
+
+@property (strong, nonatomic) LMTImage *azureImage;
+
+@end
 
 @implementation LMTScoop
+
+// Properties
+-(UIImage *) photo{
+    return self.azureImage.image;
+}
+
+-(void) setPhoto:(UIImage *)photo{
+    
+    self.azureImage.image = photo;
+}
 
 //Class Methods
 
@@ -17,7 +34,7 @@
                           body: (NSString *) body
                         author: (NSString *) author
                     authorName: (NSString *) authorName
-                         photo: (UIImage *) photo
+                   photoString: (NSString *) photoString
                      published: (BOOL) published
              preparedToPublish: (BOOL) preparedToPublish
                         rating: (int) rating{
@@ -27,7 +44,7 @@
                                   body:body
                                 author:author
                             authorName:authorName
-                                 photo:photo
+                               photoString:photoString
                              published:published
                      preparedToPublish:preparedToPublish
                                 rating:rating];
@@ -39,7 +56,7 @@
                           body: (NSString *) body
                         author: (NSString *) author
                     authorName: (NSString *) authorName
-                         photo: (UIImage *) photo
+                   photoString: (NSString *) photoString
                      published: (BOOL) published{
     
     return [[self alloc] initWithTitle:title
@@ -47,13 +64,28 @@
                                   body:body
                                 author:author
                             authorName:authorName
-                                 photo:photo
+                           photoString:photoString
+                             published:published];
+}
+
++(instancetype) scoopWithTitle: (NSString *) title
+                    identifier: (NSString *) identifier
+                          body: (NSString *) body
+                        author: (NSString *) author
+                    authorName: (NSString *) authorName
+                     published: (BOOL) published{
+    
+    return [[self alloc] initWithTitle:title
+                            identifier: (NSString *) identifier
+                                  body:body
+                                author:author
+                            authorName:authorName
                              published:published];
 }
 
 
 +(NSArray *) observableKeys{
-    return @[@"title", @"body", @"author", @"photo", @"rating"];
+    return @[@"title", @"body", @"author", @"photo", @"azureImage", @"rating"];
 }
 
 
@@ -64,7 +96,7 @@
                body: (NSString *) body
              author: (NSString *) author
          authorName: (NSString *) authorName
-              photo: (UIImage *) photo
+        photoString: (NSString *) photoString
           published: (BOOL) published
   preparedToPublish: (BOOL) preparedToPublish
              rating: (int) rating{
@@ -75,7 +107,8 @@
         _body = body;
         _author = author;
         _authorName = authorName;
-        _photo = photo;
+        _photoString = photoString;
+        _azureImage = [LMTImage imageWithPhotoString:photoString];
         _published = published;
         _preparedToPublish = preparedToPublish;
         _rating = rating;
@@ -88,7 +121,7 @@
                body: (NSString *) body
              author: (NSString *) author
          authorName: (NSString *) authorName
-              photo: (UIImage *) photo
+        photoString:(NSString *) photoString
           published: (BOOL) published{
     
     return [self initWithTitle:title
@@ -96,7 +129,25 @@
                           body:body
                         author:author
                     authorName:authorName
-                         photo:photo
+                   photoString:photoString
+                     published:published
+             preparedToPublish:NO
+                        rating:NO_RATING];
+}
+
+-(id) initWithTitle: (NSString *) title
+         identifier: (NSString *) identifier
+               body: (NSString *) body
+             author: (NSString *) author
+         authorName: (NSString *) authorName
+          published: (BOOL) published{
+    
+    return [self initWithTitle:title
+                    identifier:identifier
+                          body:body
+                        author:author
+                    authorName:authorName
+                   photoString:@""
                      published:published
              preparedToPublish:NO
                         rating:NO_RATING];

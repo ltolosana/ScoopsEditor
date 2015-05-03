@@ -9,6 +9,7 @@
 #import "LMTScoopsEditorsTableViewController.h"
 #import "LMTScoopsEditor.h"
 #import "LMTScoopEditorViewController.h"
+#import "LMTScoopViewController.h"
 
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "AzureKeys.h"
@@ -194,11 +195,12 @@
         scoop = [self.model unpublishedScoopAtIndex:indexPath.row];
     }else {
         scoop = [self.model publishedScoopAtIndex:indexPath.row];
+
     }
 
     LMTScoopEditorViewController *scoopVC = [[LMTScoopEditorViewController alloc] initWithModel:scoop
                                                                                          client:client];
-    
+
     [self.navigationController pushViewController:scoopVC
                                          animated:YES];
     
@@ -235,8 +237,7 @@
                                              body:nil
                                            author:userFBId
                                        authorName:userFBName
-                                            photo:nil
-                                        published:NO];
+                                        published:YES];
     
     LMTScoopEditorViewController *newScoopVC = [[LMTScoopEditorViewController alloc] initWithModel:newScoop
                                                                                             client:client];
@@ -369,7 +370,7 @@
 
 }
 
-#pragma mark - KVO
+
 #pragma mark - KVO
 -(void) setupKVO{
     

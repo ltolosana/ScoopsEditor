@@ -22,6 +22,7 @@
 		60619E881AF4DC8C00E60B40 /* LMTScoopsEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 60619E871AF4DC8C00E60B40 /* LMTScoopsEditor.m */; };
 		607A9A9B1AF4E6D500478FC3 /* LMTScoopEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 607A9A991AF4E6D500478FC3 /* LMTScoopEditorViewController.m */; };
 		607A9A9C1AF4E6D500478FC3 /* LMTScoopEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607A9A9A1AF4E6D500478FC3 /* LMTScoopEditorViewController.xib */; };
+		607A9AA11AF6943A00478FC3 /* LMTImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 607A9AA01AF6943A00478FC3 /* LMTImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		607A9A991AF4E6D500478FC3 /* LMTScoopEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTScoopEditorViewController.m; sourceTree = "<group>"; };
 		607A9A9A1AF4E6D500478FC3 /* LMTScoopEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMTScoopEditorViewController.xib; sourceTree = "<group>"; };
 		607A9A9E1AF4F54200478FC3 /* AzureKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AzureKeys.h; sourceTree = "<group>"; };
+		607A9A9F1AF6943A00478FC3 /* LMTImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMTImage.h; sourceTree = "<group>"; };
+		607A9AA01AF6943A00478FC3 /* LMTImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTImage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +156,8 @@
 				60619E7E1AF4D33D00E60B40 /* LMTScoops.m */,
 				60619E861AF4DC8C00E60B40 /* LMTScoopsEditor.h */,
 				60619E871AF4DC8C00E60B40 /* LMTScoopsEditor.m */,
+				607A9A9F1AF6943A00478FC3 /* LMTImage.h */,
+				607A9AA01AF6943A00478FC3 /* LMTImage.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -284,6 +289,7 @@
 				60619E821AF4D5DB00E60B40 /* LMTScoopsTableViewController.m in Sources */,
 				60619E7A1AF4C5A600E60B40 /* LMTScoopViewController.m in Sources */,
 				60619E881AF4DC8C00E60B40 /* LMTScoopsEditor.m in Sources */,
+				607A9AA11AF6943A00478FC3 /* LMTImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
