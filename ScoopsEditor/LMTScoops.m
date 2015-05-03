@@ -92,17 +92,23 @@
 -(void) serializaModelFromItemsDict: (NSArray *)items{
     
     for (id item in items) {
-        NSLog(@"item -> %@", item);
         
-        LMTScoop *scoop = [LMTScoop scoopWithTitle:item[@"titulo"]
-                                        identifier:item[@"id"]
-                                              body:item[@"noticia"]
-                                            author:nil
-                                             photo:nil
-                                         published:item[@"published"]];
+        NSNumber *p = item[@"published"];
         
-        [self.scoops addObject:scoop];
-        
+        if (p.boolValue == YES) {
+            
+            
+            NSLog(@"item -> %@", item);
+            
+            LMTScoop *scoop = [LMTScoop scoopWithTitle:item[@"titulo"]
+                                            identifier:item[@"id"]
+                                                  body:item[@"noticia"]
+                                                author:nil
+                                                 photo:nil
+                                             published:item[@"published"]];
+            
+            [self.scoops addObject:scoop];
+        }
     }
     [self notifyChanges];
 
