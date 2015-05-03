@@ -50,12 +50,9 @@
     
     [self syncModelWithView];
     
-    [self uploadScoopToAzure];
-    
     [self.tabBarController.tabBar setHidden:NO];
     
 }
-
 
 
 - (void)viewDidLoad {
@@ -123,6 +120,10 @@
     
 }
 
+- (IBAction)saveScoop:(id)sender {
+    [self uploadScoopToAzure];
+}
+
 - (IBAction)publishScoop:(id)sender {
     
     self.model.preparedToPublish = YES;
@@ -151,10 +152,10 @@
 
 - (void)uploadScoopToAzure{
     
-    if (self.model.photo) {
-        
-        [self uploadPhotoToAzure];
-    }
+//    if (self.model.photo) {
+//        
+//        [self uploadPhotoToAzure];
+//    }
     
     MSTable *news = [self.client tableWithName:@"news"];
     //    Scoop *scoop = [[Scoop alloc]initWithTitle:self.titleText.text
@@ -185,8 +186,24 @@
               if (error) {
                   NSLog(@"Error %@", error);
               } else {
+                  //Actualizamos con el photoName
                   self.model.identifier = item[@"id"];
+                  self.photoName = self.model.identifier;
                   NSLog(@"OK");
+                  
+                  // Y actualizamos el remoto
+                  NSDictionary *scoop = @{@"id" : self.model.identifier, @"photostring" : self.photoName};
+                  [news update:scoop
+                    completion:^(NSDictionary *item, NSError *error) {
+                        if (error) {
+                            NSLog(@"Error %@", error);
+                        } else {
+                            //Si hemos podido actualizar bien, subimos la foto
+                            [self uploadPhotoToAzure];
+                        }
+                        
+                    }];
+                  
               }
               
           }];

@@ -53,6 +53,12 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="oUx-X8-lbd"/>
+                        <barButtonItem systemItem="save" id="smk-8N-E9p">
+                            <connections>
+                                <action selector="saveScoop:" destination="-1" id="DCK-Jv-RtH"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="27d-7o-haP"/>
                         <barButtonItem title="Publish" id="yf1-B9-X0Q">
                             <connections>
                                 <action selector="publishScoop:" destination="-1" id="CDN-q8-0CO"/>

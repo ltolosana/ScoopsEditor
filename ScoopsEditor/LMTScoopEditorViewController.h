@@ -24,6 +24,7 @@
 
 -(IBAction)hideKeyboard:(id)sender;
 - (IBAction)takePicture:(id)sender;
+- (IBAction)saveScoop:(id)sender;
 - (IBAction)publishScoop:(id)sender;
 
 @end
