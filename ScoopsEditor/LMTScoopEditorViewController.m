@@ -12,6 +12,8 @@
 
 @interface LMTScoopEditorViewController ()
 
+@property (nonatomic, copy) NSString *photoName;
+
 @end
 
 @implementation LMTScoopEditorViewController
@@ -75,6 +77,7 @@
     self.bodyTextView.text = self.model.body;
     self.photoView.image = self.model.photo;
     
+    self.photoName = @"image01";
 }
 
 -(void)syncModelWithView{
@@ -140,6 +143,12 @@
 #pragma mark - Azure
 
 - (void)uploadScoopToAzure{
+    
+    if (self.model.photo) {
+        
+        [self uploadPhotoToAzure];
+    }
+    
     MSTable *news = [self.client tableWithName:@"news"];
     //    Scoop *scoop = [[Scoop alloc]initWithTitle:self.titleText.text
     //                                      andPhoto:nil
@@ -149,7 +158,7 @@
     
     if (self.model.identifier) {
         // Si la noticia ya existe, la actualizamos
-        NSDictionary *scoop = @{@"id" : self.model.identifier, @"titulo" : self.model.title, @"noticia" : self.model.body, @"published" : @NO};
+        NSDictionary *scoop = @{@"id" : self.model.identifier, @"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.photoName, @"published" : @NO};
         [news update:scoop
           completion:^(NSDictionary *item, NSError *error) {
               
@@ -162,7 +171,7 @@
           }];
     }else{
         //y si no, metemos una nueva
-        NSDictionary *scoop = @{@"titulo" : self.model.title, @"noticia" : self.model.body, @"published" : @NO};
+        NSDictionary *scoop = @{@"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.photoName, @"published" : @NO};
         [news insert:scoop
           completion:^(NSDictionary *item, NSError *error) {
               
@@ -176,7 +185,71 @@
           }];
         
     }
+    
+
 }
+
+
+-(void) uploadPhotoToAzure{
+    
+    //Obtenemos la sasurl
+    [self.client invokeAPI:@"getsasurl"
+                      body:nil
+                HTTPMethod:@"PUT"
+                parameters:@{@"blobName":self.photoName}
+                   headers:nil
+                completion:^(id result, NSHTTPURLResponse *response, NSError *error) {
+        
+        if (!error) {
+            
+        
+        NSLog(@"%@", result);
+        NSURL *sasURL = [NSURL URLWithString:result[@"sasUrl"]];
+                         
+        [self handleImageToUploadAzureBlob:sasURL
+                                   blobImg:self.model.photo
+                      completionUploadTask:^(id result, NSError *error) {
+                          
+                          if (!error) {
+                              NSLog(@"%@", result);
+                          }
+                      }];
+        
+        }
+    }];
+
+    
+}
+
+- (void)handleImageToUploadAzureBlob:(NSURL *)theURL blobImg:(UIImage*)blobImg completionUploadTask:(void (^)(id result, NSError * error))completion{
+    
+    
+    
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:theURL];
+    
+    [request setHTTPMethod:@"PUT"];
+    [request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
+    
+    NSData *data = UIImageJPEGRepresentation(blobImg, 1.f);
+    
+    NSURLSessionUploadTask *uploadTask = [[NSURLSession sharedSession] uploadTaskWithRequest:request fromData:data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        if (!error) {
+            NSLog(@"resultado --> %@", response);
+            
+//            [self uploadScoopToAzureUsingPhotoString];
+            
+        }
+        
+    }];
+    [uploadTask resume];
+}
+
+//-(void) uploadScoopToAzureUsingPhotoString{
+//    
+//
+//    
+//}
 
 /*
 #pragma mark - Navigation
