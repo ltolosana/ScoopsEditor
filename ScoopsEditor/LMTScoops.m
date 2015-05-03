@@ -68,6 +68,7 @@
         MSTable *table = [client tableWithName:@"news"];
         
         MSQuery *queryModel = [[MSQuery alloc]initWithTable:table];
+        [queryModel orderByDescending:@"__updatedAt"];
         [queryModel readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
             
             [self serializaModelFromItemsDict:items];

@@ -68,6 +68,7 @@
         MSTable *table = [client tableWithName:@"news"];
         
         MSQuery *queryModel = [[MSQuery alloc]initWithTable:table];
+        [queryModel orderByDescending:@"__updatedAt"];
         [queryModel readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
             
             [self serializaModelFromItemsDict:items];
@@ -95,7 +96,8 @@
 
 -(void) insertUnpublishedScoop: (LMTScoop *) scoop{
     
-    [self.unpublishedScoops addObject:scoop];
+    [self.unpublishedScoops insertObject:scoop
+                                 atIndex:0];
     
     [self notifyChanges];
 }
