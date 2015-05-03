@@ -70,7 +70,7 @@
 -(void) syncViewWithModel{
     
     self.titleTextField.text = self.model.title;
-    self.authorLabel.text = self.model.author;
+    self.authorLabel.text = self.model.authorName;
     self.bodyTextView.text = self.model.body;
     self.photoView.image = self.model.photo;
     
@@ -166,7 +166,7 @@
     
     if (self.model.identifier) {
         // Si la noticia ya existe, la actualizamos
-        NSDictionary *scoop = @{@"id" : self.model.identifier, @"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.photoName, @"published" : @(self.model.published), @"preparedToPublish" : @(self.model.preparedToPublish)};
+        NSDictionary *scoop = @{@"id" : self.model.identifier, @"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.photoName, @"author" : self.model.author, @"authorname" : self.model.authorName, @"published" : @(self.model.published), @"preparedToPublish" : @(self.model.preparedToPublish)};
         [news update:scoop
           completion:^(NSDictionary *item, NSError *error) {
               
@@ -179,7 +179,7 @@
           }];
     }else{
         //y si no, metemos una nueva
-        NSDictionary *scoop = @{@"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.photoName, @"published" : @(self.model.published), @"preparedToPublish" : @(self.model.preparedToPublish)};
+        NSDictionary *scoop = @{@"titulo" : self.model.title, @"noticia" : self.model.body, @"photostring" : self.photoName, @"author" : self.model.author, @"authorname" : self.model.authorName, @"published" : @(self.model.published), @"preparedToPublish" : @(self.model.preparedToPublish)};
         [news insert:scoop
           completion:^(NSDictionary *item, NSError *error) {
               

@@ -99,7 +99,7 @@
     // Sincronizar celda (vista) y modelo (vino)
     cell.imageView.image = scoop.photo;
     cell.textLabel.text = scoop.title;
-    cell.detailTextLabel.text = scoop.author;
+    cell.detailTextLabel.text = scoop.authorName;
     
     // La devolvemos
     return cell;

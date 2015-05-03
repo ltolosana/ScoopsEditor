@@ -104,7 +104,8 @@
             LMTScoop *scoop = [LMTScoop scoopWithTitle:item[@"titulo"]
                                             identifier:item[@"id"]
                                                   body:item[@"noticia"]
-                                                author:nil
+                                                author:item[@"author"]
+                                            authorName:item[@"authorname"]
                                                  photo:nil
                                              published:p.boolValue];
             

@@ -13,9 +13,10 @@
 //Class Methods
 
 +(instancetype) scoopWithTitle: (NSString *) title
-identifier: (NSString *) identifier
+                    identifier: (NSString *) identifier
                           body: (NSString *) body
                         author: (NSString *) author
+                    authorName: (NSString *) authorName
                          photo: (UIImage *) photo
                      published: (BOOL) published
              preparedToPublish: (BOOL) preparedToPublish
@@ -25,6 +26,7 @@ identifier: (NSString *) identifier
                             identifier: (NSString *) identifier
                                   body:body
                                 author:author
+                            authorName:authorName
                                  photo:photo
                              published:published
                      preparedToPublish:preparedToPublish
@@ -36,6 +38,7 @@ identifier: (NSString *) identifier
                     identifier: (NSString *) identifier
                           body: (NSString *) body
                         author: (NSString *) author
+                    authorName: (NSString *) authorName
                          photo: (UIImage *) photo
                      published: (BOOL) published{
     
@@ -43,6 +46,7 @@ identifier: (NSString *) identifier
                             identifier: (NSString *) identifier
                                   body:body
                                 author:author
+                            authorName:authorName
                                  photo:photo
                              published:published];
 }
@@ -59,6 +63,7 @@ identifier: (NSString *) identifier
          identifier: (NSString *) identifier
                body: (NSString *) body
              author: (NSString *) author
+         authorName: (NSString *) authorName
               photo: (UIImage *) photo
           published: (BOOL) published
   preparedToPublish: (BOOL) preparedToPublish
@@ -69,6 +74,7 @@ identifier: (NSString *) identifier
         _identifier = identifier;
         _body = body;
         _author = author;
+        _authorName = authorName;
         _photo = photo;
         _published = published;
         _preparedToPublish = preparedToPublish;
@@ -81,6 +87,7 @@ identifier: (NSString *) identifier
          identifier: (NSString *) identifier
                body: (NSString *) body
              author: (NSString *) author
+         authorName: (NSString *) authorName
               photo: (UIImage *) photo
           published: (BOOL) published{
     
@@ -88,6 +95,7 @@ identifier: (NSString *) identifier
                     identifier:identifier
                           body:body
                         author:author
+                    authorName:authorName
                          photo:photo
                      published:published
              preparedToPublish:NO

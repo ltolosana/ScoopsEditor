@@ -54,7 +54,7 @@
     
     //sincronizo modelo --> vistas
     self.titleLabel.text = self.model.title;
-    self.authorLabel.text = self.model.author;
+    self.authorLabel.text = self.model.authorName;
     self.bodyLabel.text = self.model.body;
     self.photoView.image = self.model.photo;
     

@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *body;
 @property (strong, nonatomic) NSString *author;
+@property (strong, nonatomic) NSString *authorName;
 @property (nonatomic) int rating; // 0 - 5
 @property (nonatomic, strong) UIImage *photo;
 @property (nonatomic) BOOL published;
@@ -33,6 +34,7 @@
                     identifier: (NSString *) identifier
                           body: (NSString *) body
                         author: (NSString *) author
+                    authorName: (NSString *) authorName
                          photo: (UIImage *) photo
                      published: (BOOL) published
              preparedToPublish: (BOOL) preparedToPublish
@@ -42,6 +44,7 @@
                     identifier: (NSString *) identifier
                           body: (NSString *) body
                         author: (NSString *) author
+                    authorName: (NSString *) authorName
                          photo: (UIImage *) photo
                      published: (BOOL) published;
 
@@ -53,6 +56,7 @@
          identifier: (NSString *) identifier
                body: (NSString *) body
              author: (NSString *) author
+         authorName: (NSString *) authorName
               photo: (UIImage *) photo
           published: (BOOL) published
   preparedToPublish: (BOOL) preparedToPublish
@@ -62,6 +66,7 @@
          identifier: (NSString *) identifier
                body: (NSString *) body
              author: (NSString *) author
+         authorName: (NSString *) authorName
               photo: (UIImage *) photo
           published: (BOOL) published;
 

@@ -17,6 +17,7 @@
     MSClient *client;
     NSString *userFBId;
     NSString *tokenFB;
+    NSString *userFBName;
 }
 
 @end
@@ -30,7 +31,7 @@
         _model= aModel;
         
         self.title = @"Editor de noticias";
-        
+      
         [self addNewScoopButton];
     }
     return self;
@@ -135,10 +136,10 @@
     }
     
     
-    // Sincronizar celda (vista) y modelo (vino)
+    // Sincronizar celda (vista) y modelo
     cell.imageView.image = scoop.photo;
     cell.textLabel.text = scoop.title;
-    cell.detailTextLabel.text = scoop.author;
+    cell.detailTextLabel.text = scoop.authorName;
     
 //    [self setupKVO];
     
@@ -232,7 +233,8 @@
     LMTScoop *newScoop = [LMTScoop scoopWithTitle:@"New scoop"
                                        identifier:nil
                                              body:nil
-                                           author:@"Autor"
+                                           author:userFBId
+                                       authorName:userFBName
                                             photo:nil
                                         published:NO];
     
@@ -278,7 +280,8 @@
             //tenemos info extra del usuario
             NSLog(@"%@", result);
 //            self.profilePicture = [NSURL URLWithString:result[@"picture"][@"data"][@"url"]];
-            self.title = [@"Editor de noticias: " stringByAppendingString:result[@"name"]];
+            userFBName = result[@"name"];
+            self.title = [@"Editor de noticias: " stringByAppendingString:userFBName];
         }];
         
         return;
@@ -301,7 +304,8 @@
                                //tenemos info extra del usuario
                                NSLog(@"%@", result);
 //                               self.profilePicture = [NSURL URLWithString:result[@"picture"][@"data"][@"url"]];
-                               self.title = [@"Editor de noticias: " stringByAppendingString:result[@"name"]];
+                               userFBName = result[@"name"];
+                               self.title = [@"Editor de noticias: " stringByAppendingString:userFBName];
                                
                            }];
                            
